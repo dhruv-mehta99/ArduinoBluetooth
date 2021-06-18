@@ -60,6 +60,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listView_paired_device" />
 
+    <com.agrawalsuneet.dotsloader.loaders.CircularDotsLoader
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/view_line_available"
+        app:layout_constraintStart_toEndOf="@+id/tv_available"
+        app:loader_animDur="100"
+        app:loader_bigCircleRadius="11dp"
+        app:loader_circleRadius="3dp"
+        android:visibility="invisible"
+        android:id="@+id/dot_loader"
+        app:loader_showRunningShadow="true" />
     <View
         android:id="@+id/view_line_available"
         android:layout_width="match_parent"

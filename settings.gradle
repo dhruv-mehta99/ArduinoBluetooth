@@ -1,0 +1,2 @@
+rootProject.name = "ArduinoBluetooth"
+include ':app'

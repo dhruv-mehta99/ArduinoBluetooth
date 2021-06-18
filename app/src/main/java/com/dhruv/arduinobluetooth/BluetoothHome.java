@@ -1,5 +1,6 @@
 package com.dhruv.arduinobluetooth;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,12 +16,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +52,7 @@ public class BluetoothHome extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.e(TAG, "onCreate: " );
         if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
             BluetoothUtils.toast(getApplicationContext(), "BLE not supported");
             finish();
@@ -62,26 +68,11 @@ public class BluetoothHome extends AppCompatActivity implements View.OnClickList
         mPairedBTDevicesArrayList = new ArrayList<>();
         mAvailableBTDevicesArrayList = new ArrayList<>();
 
-        adapter_avaialble_device = new ListAdapter_BTLE_Devices(this, R.layout.btle_list_adapter_layout, mAvailableBTDevicesArrayList);
-
-        ListView availableDevice = findViewById(R.id.listView_available_device);
-        availableDevice.setAdapter(adapter_avaialble_device);
-        availableDevice.setOnItemClickListener(this);
-
-        adapter_paired_device = new ListAdapter_BTLE_Devices(this, R.layout.btle_list_adapter_layout, mPairedBTDevicesArrayList);
-
-        ListView pairedDevice = findViewById(R.id.listView_paired_device);
-        pairedDevice.setAdapter(adapter_paired_device);
-        ConstraintLayout.LayoutParams list = (ConstraintLayout.LayoutParams) pairedDevice.getLayoutParams();
-        list.height = 55*(getResources().getDisplayMetrics().heightPixels)/100;
-        pairedDevice.setLayoutParams(list);
-        pairedDevice.setOnItemClickListener(this);
 
         BluetoothManager mbluetoothManager = (BluetoothManager) this.getSystemService(Context.BLUETOOTH_SERVICE);
         bTAdapter=mbluetoothManager.getAdapter();
 
-        btn_Scan = findViewById(R.id.btn_scan);
-        btn_Scan.setOnClickListener(this);
+        initializeLayoutElements(getResources().getConfiguration().orientation);
     }
 
 
@@ -104,6 +95,15 @@ public class BluetoothHome extends AppCompatActivity implements View.OnClickList
         unregisterReceiver(mBTStateUpdateReceiver);
         stopScan();
     }
+
+    @Override
+    public void onConfigurationChanged(@NonNull @NotNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        setContentView(R.layout.activity_main);
+        initializeLayoutElements(newConfig.orientation);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -139,16 +139,53 @@ public class BluetoothHome extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        BluetoothDevice device = mPairedBTDevicesArrayList.get(position).getBluetoothDevice();
-        Log.d("DEVICELIST", "onItemClick position: " + position +
-                " id: " + id + " name: " + device.getName() + "\n");
+        BluetoothDevice device;
+        switch (parent.getId()){
+            case R.id.listView_paired_device:
+                Log.e(TAG, "onItemClick: for paired device");
+                device = mPairedBTDevicesArrayList.get(position).getBluetoothDevice();
+                break;
+            case R.id.listView_available_device:
+                Log.e(TAG, "onItemClick: for available device");
+                device = mAvailableBTDevicesArrayList.get(position).getBluetoothDevice();
+                device.createBond();
+
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + parent.getId());
+        }
+        stopScan();
         Intent i = new Intent(BluetoothHome.this,BluetoothController.class);
         i.putExtra("KEY_DEVICE",device);
         startActivity(i);
 
     }
 
+    private void initializeLayoutElements(int orientation){
+        adapter_avaialble_device = new ListAdapter_BTLE_Devices(this, R.layout.btle_list_adapter_layout, mAvailableBTDevicesArrayList);
 
+        ListView availableDevice = findViewById(R.id.listView_available_device);
+        availableDevice.setAdapter(adapter_avaialble_device);
+        availableDevice.setOnItemClickListener(this);
+
+        adapter_paired_device = new ListAdapter_BTLE_Devices(this, R.layout.btle_list_adapter_layout, mPairedBTDevicesArrayList);
+
+        ListView pairedDevice = findViewById(R.id.listView_paired_device);
+        pairedDevice.setAdapter(adapter_paired_device);
+        pairedDevice.setOnItemClickListener(this);
+        btn_Scan = findViewById(R.id.btn_scan);
+        btn_Scan.setOnClickListener(this);
+        if(mBTLeScanner.isScanning()){
+            findViewById(R.id.dot_loader).setVisibility(View.VISIBLE);
+        }
+
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        } else if (orientation == Configuration.ORIENTATION_PORTRAIT){
+            ConstraintLayout.LayoutParams list = (ConstraintLayout.LayoutParams) pairedDevice.getLayoutParams();
+            list.height = 55*(getResources().getDisplayMetrics().heightPixels)/100;
+            pairedDevice.setLayoutParams(list);
+        }
+    }
     public void addDevice(BluetoothDevice device,int listName) {
 
         String address = device.getAddress();
@@ -170,12 +207,12 @@ public class BluetoothHome extends AppCompatActivity implements View.OnClickList
     }
 
     public void startScan() {
-        BluetoothUtils.toast(this,"scan started");
+        findViewById(R.id.dot_loader).setVisibility(View.VISIBLE);
         mBTLeScanner.start();
     }
 
     public void stopScan() {
-        BluetoothUtils.toast(this,"scan stopped");
         mBTLeScanner.stop();
+        findViewById(R.id.dot_loader).setVisibility(View.INVISIBLE);
     }
 }

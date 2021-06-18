@@ -19,7 +19,8 @@
             android:name=".BluetoothController"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="landscape" />
-        <activity android:name=".BluetoothHome">
+        <activity android:name=".BluetoothHome"
+            android:configChanges="orientation|screenSize|screenLayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -62,7 +62,6 @@ public class Scanner_BTLE {
                 }
             },scanPeriod);
             mScanning=true;
-            BluetoothUtils.toast(bluetoothHome.getApplication(), "Scanning for 0");
             final boolean b = mbluetoothAdapter.startDiscovery();
             Log.d("STARTSCAN", "bluetooth discovery is " + b);
         }else{

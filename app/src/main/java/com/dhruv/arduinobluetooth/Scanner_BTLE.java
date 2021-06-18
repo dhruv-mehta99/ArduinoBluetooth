@@ -78,7 +78,7 @@ public class Scanner_BTLE {
         Set<BluetoothDevice> pairedDevices = mbluetoothAdapter.getBondedDevices();
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
-                bluetoothHome.addDevice(device);
+                bluetoothHome.addDevice(device,BluetoothHome.PAIRED_DEVICE_LIST);
             }
         }
     }

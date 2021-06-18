@@ -3,7 +3,8 @@
     package="com.dhruv.arduinobluetooth">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
-
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
@@ -13,8 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BluetoothHome"></activity>
-        <activity android:screenOrientation="landscape" android:configChanges="orientation|keyboardHidden" android:name=".BluetoothController">
+        <activity android:name=".KeyBindings"></activity>
+        <activity
+            android:name=".BluetoothController"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape" />
+        <activity android:name=".BluetoothHome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

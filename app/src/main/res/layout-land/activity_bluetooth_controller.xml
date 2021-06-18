@@ -2,16 +2,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".BluetoothController"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#2C2828">
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress_circular"
+        android:background="@android:color/transparent"/>
+
+
+
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BluetoothController"
     android:gravity="top"
-    android:background="#2C2828"
-
     android:paddingHorizontal="40dp"
-    android:paddingVertical="10dp">
-
-
+    android:paddingVertical="10dp"
+    android:id="@+id/mainlayout">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,6 +39,8 @@
             android:layout_height="match_parent"
             android:textColor="#A7A7A7"
             android:text="Device 1"
+            android:id="@+id/tv_device_name"
+            android:fontFamily="@font/montserrat_extra_bold_italic"
             android:textSize="25sp"
             android:textStyle="bold|italic"
             android:gravity="center_vertical"
@@ -35,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingEnd="10dp"
+            android:id="@+id/btn_key_binding"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_baseline_settings_24"
             android:layout_alignParentEnd="true"/>
@@ -158,6 +173,41 @@
         android:layout_alignEnd="@+id/shape_buttons"
         android:layout_alignTop="@+id/shape_buttons"/>
 
-    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+    <Button
+        android:layout_width="135dp"
+        android:layout_height="43dp"
+        android:text="Start"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/montserrat_medium_italic"
+        android:id="@+id/btn_start"
+        android:textColor="@color/white"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/start_btn_bg"
+        />
+
+    <Button
+        android:id="@+id/btn_stop"
+        android:layout_width="135dp"
+        android:layout_height="43dp"
+        android:text="Stop"
+        android:textColor="@color/white"
+        android:layout_below="@+id/btn_start"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        android:fontFamily="@font/montserrat_medium_italic"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/stop_btn_bg"
+        />
+
+    </LinearLayout>
+</RelativeLayout>
 
 </RelativeLayout>

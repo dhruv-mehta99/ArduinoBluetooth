@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ArduinoBluetooth</string>
+    <string name="key_binding_up">KEY_BINDING_UP</string>
+    <string name="key_binding_down">KEY_BINDING_DOWN</string>
+    <string name="key_binding_left">KEY_BINDING_LEFT</string>
+    <string name="key_binding_right">KEY_BINGING_RIGHT</string>
+    <string name="key_binding_circle">KEY_BINGING_CIRCLE</string>
+    <string name="key_binding_cross">KEY_BINGING_CROSS</string>
+    <string name="key_binding_square">KEY_BINGING_SQUARE</string>
+    <string name="key_binding_triangle">KEY_BINGING_TRIANGLE</string>
+    <string name="key_binding_start">KEY_BINGING_START</string>
+    <string name="key_binding_stop">KEY_BINGING_STOP</string>
+
 </resources>

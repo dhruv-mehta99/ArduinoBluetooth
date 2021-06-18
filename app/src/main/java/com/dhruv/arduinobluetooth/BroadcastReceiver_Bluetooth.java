@@ -31,15 +31,16 @@ public class BroadcastReceiver_Bluetooth extends BroadcastReceiver {
             device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             // Create a new device item
             BTLE_Device newDevice = new BTLE_Device(device);
-            bluetoothHome.addDevice(device);
+            bluetoothHome.addDevice(device,BluetoothHome.AVAILABLE_DEVICE_LIST);
             // Add it to our adapter
             Log.d("DEVICELIST", "Bluetooth device found " + device.getName());
         }
         if (BluetoothDevice.ACTION_ACL_CONNECTED.equals(action)) {
             //Do something if connected
             Toast.makeText(bluetoothController.getApplicationContext(), "BT Connected", Toast.LENGTH_SHORT).show();
-            bluetoothController.findViewById(R.id.linear_layout1).setVisibility(View.VISIBLE);
-            bluetoothController.findViewById(R.id.progress_bar).setActivated(false);
+            bluetoothController.findViewById(R.id.mainlayout).setVisibility(View.VISIBLE);
+            bluetoothController.findViewById(R.id.progress_circular).setVisibility(View.GONE);
+            bluetoothController.findViewById(R.id.progress_circular).setActivated(false);
 
         }
         else if (BluetoothDevice.ACTION_ACL_DISCONNECTED.equals(action)) {

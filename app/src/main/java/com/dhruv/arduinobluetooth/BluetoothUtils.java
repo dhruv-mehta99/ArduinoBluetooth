@@ -22,7 +22,7 @@ public class BluetoothUtils {
 
     public static void requestUserBluetooth(Activity activity) {
         Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-        //activity.startActivityForResult(enableBtIntent, BluetoothHome.REQUEST_ENABLE_BT);
+        activity.startActivityForResult(enableBtIntent, BluetoothHome.REQUEST_ENABLE_BT);
     }
 
     public static void toast(Context context, String string) {

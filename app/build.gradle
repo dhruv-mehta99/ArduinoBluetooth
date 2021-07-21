@@ -6,11 +6,11 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.dhruv.arduinobluetooth"
+        applicationId "com.innoventx.bluetoothcontroller"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 4
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

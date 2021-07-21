@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ArduinoBluetooth</string>
+    <string name="app_name">Bluetooth Controller</string>
     <string name="key_binding_up">KEY_BINDING_UP</string>
     <string name="key_binding_down">KEY_BINDING_DOWN</string>
     <string name="key_binding_left">KEY_BINDING_LEFT</string>

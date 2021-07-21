@@ -8,9 +8,7 @@
 * [Description](#description)
 * [Requirements](#requirements)
 * [Working](#working)
-* [App Demo](#app-demo)
-* [Author Info](#author-info)
-
+* [Play Store](#play-store)
 ---
 
 ## Description
@@ -32,31 +30,34 @@ Convert Your Phone into a remote controller and control your project via Arduino
 
 ## Working
 
-<img src="Images/page1.jpg">
 
+### Device Searching Page
+
+<img src="Images/page1.jpg" width="250">
+
+* Open the app and this page appears.
+* Select your Bluetooth device either from paired devices list or scan for a new device.
+
+
+### Bluetooth Controller
+
+<img src="Images/page2.jpg" width="512">
+
+* This is the remote control page.
+* Tap on the Settings button on the top right corner to configure your App with your Bluetooth Module.
+
+
+### Key Bindings
+
+<img src="Images/page3.jpg" width="512">
+
+* This is the controller configuration page.
+* Enter the value that is to be sent to your Bluetooth module on the tap of each available key.
+* Click Done when completed with Binding key to its corresponding values.
 
 
 ---
 
-## Process Flow
+## Play Store
 
-<img src="Images/Flow Diagram.svg">
-
----
-
-## Data Flow Diagram
-
-<img src="Images/Data Flow Diagram.svg">
-
----
-
-## App Demo
-
-[Video Link](https://youtu.be/48jCTzEHn7Y)
-
-## Author Info
-
-* [Dhruv Mehta](https://github.com/dhruv-mehta99)
-* [Gracika Rajput](https://github.com/gracika)
-* [Ishan Patel](https://github.com/ishan1410)
-* [Yash Shah](https://github.com/yash156)
+[App Link](https://play.google.com/store/apps/details?id=com.innoventx.bluetoothcontroller)
